@@ -1,64 +1,41 @@
-"use client"; // Required for Framer Motion and interactivity
-import { motion } from "framer-motion";
+import Link from "next/link";
+import PageShell from "@/components/page-shell";
+import { events, highlights } from "@/components/site-content";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white text-gray-800 p-8">
-      
-      {/* Navigation */}
-      <nav className="flex justify-end space-x-6 mb-16 font-semibold">
-        <a href="#home" className="hover:text-blue-600 transition-colors">Home</a>
-        <a href="#about" className="hover:text-blue-600 transition-colors">About US</a>
-        <a href="#events" className="hover:text-blue-600 transition-colors">Events</a>
-        <a href="#contact" className="hover:text-blue-600 transition-colors">Contact US</a>
-      </nav>
+    <PageShell
+      eyebrow="UU - CSC"
+      title="Build, lead, and launch with the Computer Science Club."
+      description="A student-led community focused on design, engineering, and real-world project execution."
+    >
+      <div className="grid gap-5 md:grid-cols-3">
+        {highlights.map((item) => (
+          <article
+            key={item.title}
+            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+          >
+            <h2 className="text-xl font-semibold text-slate-900">{item.title}</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-600">{item.description}</p>
+          </article>
+        ))}
+      </div>
 
-      {/* Hero Section */}
-      <motion.section 
-        id="home"
-        className="flex flex-col items-center text-center mb-24"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="w-32 h-32 bg-gray-200 border-2 border-gray-400 flex items-center justify-center mb-4 transform rotate-45">
-          {/* Placeholder for the shield logo */}
-          <span className="transform -rotate-45 font-bold">UU-CSC</span>
+      <section className="mt-10 grid gap-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:grid-cols-[2fr_1fr]">
+        <div>
+          <h3 className="text-2xl font-semibold text-slate-900">Upcoming spotlight event</h3>
+          <p className="mt-3 text-slate-600">{events[0].details}</p>
+          <p className="mt-3 text-sm font-medium text-blue-700">{events[0].date}</p>
         </div>
-        <h1 className="text-2xl font-bold mt-4 border-b-2 border-gray-300 pb-2">Line / Slogans Slogans</h1>
-      </motion.section>
-
-      {/* Events Placeholder */}
-      <section id="events" className="mb-24 flex flex-col items-center">
-        <div className="w-full max-w-4xl border-2 border-gray-800 p-6 rounded-lg h-64 flex items-center justify-center text-gray-500">
-          Events Area Placeholder
-        </div>
-      </section>
-
-      {/* Skills Placeholder */}
-      <section id="skills" className="mb-24">
-        <h2 className="text-xl font-bold mb-4">SKILL (we are providing)</h2>
-        <div className="h-32 border-2 border-gray-400 border-dashed rounded flex items-center justify-center text-gray-500">
-          Skills List Placeholder
+        <div className="flex items-center md:justify-end">
+          <Link
+            href="/events"
+            className="inline-flex rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-slate-700"
+          >
+            Explore Events
+          </Link>
         </div>
       </section>
-
-      {/* About Placeholder */}
-      <section id="about" className="mb-24">
-        <h2 className="text-xl font-bold mb-4">About US</h2>
-        <div className="h-32 border-2 border-gray-400 border-dashed rounded flex items-center justify-center text-gray-500">
-          Short Paragraph Placeholder
-        </div>
-      </section>
-
-      {/* Contact Placeholder */}
-      <section id="contact" className="mb-24">
-        <h2 className="text-xl font-bold mb-4">GET IN TOUCH</h2>
-        <div className="h-64 border-2 border-gray-400 border-dashed rounded flex items-center justify-center text-gray-500">
-          Contact Form Placeholder
-        </div>
-      </section>
-
-    </div>
+    </PageShell>
   );
 }
